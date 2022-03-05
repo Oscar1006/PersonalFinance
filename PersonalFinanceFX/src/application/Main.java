@@ -18,7 +18,6 @@ public class Main extends Application {
 	public static final String ICON_IMG = "file:../../images/icon.png";
 	
 	private Parent root;
-	//private Stage currentStage;
 	private Stage newStage;
 	private Scene scene;
 	private FXMLLoader loader;
@@ -45,7 +44,6 @@ public class Main extends Application {
 			newStage.getIcons().add(new Image(ICON_IMG));
 			newStage.setScene(scene);
 			newStage.show();
-			//currentStage = newStage;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

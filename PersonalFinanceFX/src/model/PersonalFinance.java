@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class PersonalFinance {
 
@@ -28,12 +29,33 @@ public class PersonalFinance {
 		expenses.add(new Expense(amount, description, date));
 	}
 
-	public void deleteIncome(int index) {
-		income.remove(index);
+	public void deleteIncome(List<Income> toDelete) {
+		boolean deleted = false;
+		for (int j = 0; j < toDelete.size(); j++) {
+			Income incomeToDelete = toDelete.get(j);
+			
+			for (int i = 0; i < income.size() && !deleted; i++) {
+				if(income.get(i).equals(incomeToDelete)) {
+					income.remove(i);
+					deleted = true;
+				}
+			}
+			deleted = false;
+		}
 	}
 
-	public void deleteExpense(int index) {
-		expenses.remove(index);
+	public void deleteExpense(List<Expense> toDelete) {
+		boolean deleted = false;
+		for (int j = 0; j < toDelete.size(); j++) {
+			Expense expenseToDelete = toDelete.get(j);	
+			for (int i = 0; i < expenses.size() && !deleted; i++) {
+				if(expenses.get(i).equals(expenseToDelete)) {
+					expenses.remove(i);
+					deleted = true;
+				}
+			}
+			deleted = false;
+		}
 	}
 
 	public ArrayList<Income> getIncome() {

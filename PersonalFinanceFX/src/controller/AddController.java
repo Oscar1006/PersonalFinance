@@ -7,12 +7,14 @@ import application.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class AddController {
@@ -81,6 +83,8 @@ public class AddController {
 		alert.setTitle("Error");
 		alert.setHeaderText("Faltan campos por rellenar");
 		alert.setContentText("Por favor rellene todos los campos");
+		Stage stage =(Stage)alert.getDialogPane().getScene().getWindow();
+		stage.getIcons().add(new Image(Main.ICON_IMG));
 		
 		if(!txtAmount.getText().isEmpty() && !txtDescription.getText().isEmpty() && dpDate.getValue()!=null) {
 
