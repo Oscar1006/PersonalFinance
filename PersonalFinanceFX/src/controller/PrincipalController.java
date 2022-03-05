@@ -108,6 +108,11 @@ public class PrincipalController {
 		main.showAddModule();
 
 	}
+	@FXML
+	public void update() {
+		initializeData();
+
+	}
 
 	@FXML
 	public void delete() {

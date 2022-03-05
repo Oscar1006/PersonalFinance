@@ -30,6 +30,11 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </RadioButton>
+            <Button mnemonicParsing="false" onAction="#update" text="Actualizar">
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
       </HBox>
       <HBox alignment="CENTER" prefHeight="70.0" prefWidth="550.0">
