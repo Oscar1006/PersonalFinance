@@ -64,7 +64,7 @@ public class PrincipalController {
 		ObservableList<Expense> out = FXCollections.observableArrayList(main.getFinance().getExpenses());
 		tvExpenses.setItems(out);
 
-		labelBalance.setText("$ " + String.valueOf(main.getFinance().getBalance()));
+		labelBalance.setText(String.valueOf(main.getFinance().getBalance()));
 	}
 
 	@FXML
@@ -77,9 +77,9 @@ public class PrincipalController {
 			dpSince.setDisable(true);
 			dpUntil.setDisable(true);
 		}
-		String newBalance = labelBalance.getText();
+		
 		if (dpSince.getValue() != null && dpUntil.getValue() != null) {
-
+			String newBalance = "";
 			LocalDate ldSince = dpSince.getValue();
 			GregorianCalendar gcSince = new GregorianCalendar(ldSince.getYear(), ldSince.getMonthValue(),
 					ldSince.getDayOfMonth());
@@ -87,11 +87,10 @@ public class PrincipalController {
 			GregorianCalendar gcUntil = new GregorianCalendar(ldUntil.getYear(), ldUntil.getMonthValue(),
 					ldUntil.getDayOfMonth());
 
-			ObservableList<Income> in = FXCollections
-					.observableArrayList(main.getFinance().getIncome(gcSince, gcUntil));
+			ObservableList<Income> in = FXCollections.observableArrayList(main.getFinance().getIncome(gcSince, gcUntil));
 			tvIncome.setItems(in);
 
-			ObservableList<Expense> out = FXCollections.observableArrayList(main.getFinance().getExpenses());
+			ObservableList<Expense> out = FXCollections.observableArrayList(main.getFinance().getExpense(gcSince, gcUntil));
 			tvExpenses.setItems(out);
 
 			newBalance = String.valueOf(main.getFinance().getBalance(gcSince, gcUntil));

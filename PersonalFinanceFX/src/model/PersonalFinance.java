@@ -43,8 +43,8 @@ public class PersonalFinance {
 	public ArrayList<Income> getIncome(GregorianCalendar since, GregorianCalendar until) {
 		ArrayList <Income> incomeBetweenDates = new ArrayList<>();
 		for (int i = 0; i < income.size(); i++) {
-			boolean isAfterSince = income.get(i).getDate().compareTo(since) > 0;
-			boolean isBeforeUntil = income.get(i).getDate().compareTo(until) < 0;
+			boolean isAfterSince = income.get(i).getDate().compareTo(since) >= 0;
+			boolean isBeforeUntil = income.get(i).getDate().compareTo(until) <= 0;
 			if (isAfterSince && isBeforeUntil) {
 				incomeBetweenDates.add(income.get(i));
 			}
@@ -57,8 +57,8 @@ public class PersonalFinance {
 	public ArrayList<Expense> getExpense(GregorianCalendar since, GregorianCalendar until) {
 		ArrayList <Expense> expensesBetweenDates = new ArrayList<>();
 		for (int i = 0; i < expenses.size(); i++) {
-			boolean isAfterSince = expenses.get(i).getDate().compareTo(since) > 0;
-			boolean isBeforeUntil = expenses.get(i).getDate().compareTo(until) < 0;
+			boolean isAfterSince = expenses.get(i).getDate().compareTo(since) >= 0;
+			boolean isBeforeUntil = expenses.get(i).getDate().compareTo(until) <= 0;
 			if (isAfterSince && isBeforeUntil) {
 				expensesBetweenDates.add(expenses.get(i));
 			}
@@ -90,17 +90,16 @@ public class PersonalFinance {
 			}
 		}
 		int totalExpenses = 0;
+		
 		for (int i = 0; i < expenses.size(); i++) {
-			boolean isAfterSince = income.get(i).getDate().compareTo(since) >= 0;
-			boolean isBeforeUntil = income.get(i).getDate().compareTo(until) <= 0;
+			boolean isAfterSince = expenses.get(i).getDate().compareTo(since) >= 0;
+			boolean isBeforeUntil = expenses.get(i).getDate().compareTo(until) <= 0;
 			if (isAfterSince && isBeforeUntil) {
 				totalExpenses += expenses.get(i).getAmount();
 			}
-			
 		}
-		balance = totalIncome - totalExpenses;
 
-		return balance;
+		return totalIncome - totalExpenses;
 	}
 
 }
