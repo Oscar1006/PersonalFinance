@@ -73,7 +73,7 @@ public class PrincipalController {
 			dpSince.setDisable(false);
 			dpUntil.setDisable(false);
 		} else {
-			initializeData();
+			
 			dpSince.setDisable(true);
 			dpUntil.setDisable(true);
 		}
@@ -95,6 +95,10 @@ public class PrincipalController {
 
 			newBalance = String.valueOf(main.getFinance().getBalance(gcSince, gcUntil));
 			labelBalance.setText(newBalance);
+		}
+		
+		if (!rbtnFilter.isSelected()) {
+			initializeData();
 		}
 
 	}

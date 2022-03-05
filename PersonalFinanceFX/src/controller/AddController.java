@@ -1,9 +1,12 @@
 package controller;
 
 import java.time.LocalDate;
+import java.util.GregorianCalendar;
 
 import application.Main;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
@@ -37,6 +40,8 @@ public class AddController {
 	@FXML
 	private TextField txtDescription;
 
+	Alert alert = new Alert(AlertType.ERROR);
+
 	@FXML
 	public void initialize() {
 		// Toggle income and expense buttons
@@ -44,7 +49,7 @@ public class AddController {
 		rbIncome.setToggleGroup(toggleIN_EX);
 		rbExpense.setToggleGroup(toggleIN_EX);
 		rbIncome.setSelected(true);
-		
+
 		// Date picker
 		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
 			@Override
@@ -61,11 +66,11 @@ public class AddController {
 		dpDate.setDayCellFactory(dayCellFactory);
 
 	}
-	
+
 	@FXML
 	public void onlyNumbers(KeyEvent event) {
 		char c = event.getCharacter().charAt(0);
-		if(!Character.isDigit(c)) {
+		if (!Character.isDigit(c)) {
 			event.consume();
 		}
 	}
@@ -73,6 +78,31 @@ public class AddController {
 	@FXML
 	public void addElement() {
 
+		alert.setTitle("Error");
+		alert.setHeaderText("Faltan campos por rellenar");
+		alert.setContentText("Por favor rellene todos los campos");
+		
+		if(!txtAmount.getText().isEmpty() && !txtDescription.getText().isEmpty() && dpDate.getValue()!=null) {
+
+			if (toggleIN_EX.getSelectedToggle().equals(rbIncome)) {
+				int amount = Integer.parseInt(txtAmount.getText());
+				String description = txtDescription.getText();
+				LocalDate ld = dpDate.getValue();
+				GregorianCalendar gc= new GregorianCalendar(ld.getYear(), ld.getMonthValue(),
+						ld.getDayOfMonth());
+				main.getFinance().addIncome(amount, description, gc);
+			} else {
+				int amount = Integer.parseInt(txtAmount.getText());
+				String description = txtDescription.getText();
+				LocalDate ld = dpDate.getValue();
+				GregorianCalendar gc= new GregorianCalendar(ld.getYear(), ld.getMonthValue(),
+						ld.getDayOfMonth());
+				main.getFinance().addExpense(amount, description, gc);
+			}	
+		}else {
+			alert.showAndWait();	
+		}
+		
 	}
 
 }
